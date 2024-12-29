@@ -1,0 +1,35 @@
+/* Formu.css */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    margin-top: 0;
+  }
+  
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+.form-container input {
+    width: 80%;
+    padding: 8px;
+    margin: 2px 0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  
+
+  
+.form-container   button:hover {
+    background-color: #45a049;
+  }
+  

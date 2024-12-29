@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: exam
+  name: backend-deployment
+  labels:
+    app: backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-deployment
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      name: backend-deployment
+      labels:
+        app: backend-deployment
+    spec:
+      containers:
+        - name: backend-deployment
+          image: imgoune/thebackend:3.0
+          resources:
+            requests:
+              cpu: "1"
+              memory: "500Mi"
+            limits:
+              cpu: "1.5"
+              memory: "1Gi"
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_URL
+                  name: backend-config
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: secretconf-basic-auth
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: secretconf-basic-auth
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_JPA_HIBERNATE_DDL_AUTO
+                  name: backend-config
+          imagePullPolicy: IfNotPresent
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: exam
+spec:
+  selector:
+    app: backend-deployment
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: backend-pdb
+  namespace: exam
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: backend-deployment

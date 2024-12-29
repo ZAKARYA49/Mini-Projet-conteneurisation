@@ -1,0 +1,77 @@
+/* Conteneur principal de chaque élément */
+.validation-element {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+/* État de validation réussie (vert) */
+.validation-element.success {
+  background-color: #238e27c9;
+  color: white;
+}
+
+/* État de validation échouée (rouge) */
+.validation-element.failure {
+  background-color: #f44336d0;
+  color: white;
+}
+
+/* Contenu de chaque élément de la ligne */
+.validation-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+/* Style pour le nom, la date et la moyenne */
+.validation-item span {
+  padding: 5px;
+  width: 30%;
+  text-align: center;
+}
+
+/* Style pour l'image */
+.validation-item img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* État neutre (moyenne indisponible) */
+.validation-element.neutral {
+  background-color: #ffcc80; /* Couleur orange pâle */
+  color: black; /* Texte noir */
+}
+/* Centrer le bouton */
+button {
+  display: block;
+  margin: 20px auto; /* Centre horizontalement */
+  padding: 10px 20px;
+  background-color: #1DA1F2; /* Couleur Twitter */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Style du lien à l'intérieur du bouton */
+button a {
+  text-decoration: none;
+  color: white; /* Couleur du texte blanc */
+}
+
+/* Effet au survol */
+button:hover {
+  background-color: #0d8ae5; /* Couleur plus foncée au survol */
+}

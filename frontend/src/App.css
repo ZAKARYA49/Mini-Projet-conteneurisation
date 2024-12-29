@@ -1,0 +1,5 @@
+/* Appliquer un fond global et des espacements */
+h1 {
+    text-align: center;
+    color: black;  /* Couleur du texte du titre */
+}

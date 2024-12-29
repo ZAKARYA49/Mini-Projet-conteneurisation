@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: localhost:5000/frontend:latest
+    container_name: frontend-container
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: localhost:5000/my-springboot-app:latest
+    container_name: backend_container
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://mon_postgres:5432/mydatabase
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=rafik44
+    depends_on:
+      - mon_postgres
+
+  mon_postgres:
+    image: localhost:5000/postgres
+    container_name: mon_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rafik44
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

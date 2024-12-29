@@ -1,0 +1,57 @@
+/* Conteneur principal de chaque élément */
+.containera {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Classe de validation pour les notes */
+.validation-elementa {
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+  transition: background-color 0.3s ease;
+}
+
+/* État de validation réussie (vert) */
+.validation-elementa.successa {
+  background-color: #339336c9;
+  color: white;
+}
+
+/* État de validation échouée (rouge) */
+.validation-elementa.failurea {
+  background-color: #f44336d0;
+  color: white;
+}
+
+/* Style pour chaque élément dans le container */
+.validation-elementa span {
+  padding: 5px;
+  width: 50%;
+  text-align: center;
+}
+
+/* Centrer le texte du nom et de la moyenne */
+.validation-elementa span:first-child {
+  font-weight: bold;
+}
+
+/* Centrer le texte de la moyenne */
+.validation-element span:last-child {
+  font-size: 16px;
+}
+
+/* Style pour l'image si nécessaire (à ajouter dans le futur) */
+.validation-element img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}

@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - net1
+    depends_on:
+      - frontend
+      - backend
+  frontend:
+    image: frontend:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 2
+        delay: 10s
+    ports:
+      - "80:80"
+    networks:
+      - net1
+
+  backend:
+    image: imgoune/my-springboot-app:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 15s
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=rafik44
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+    networks:
+      - net1
+  db:
+    image: postgres:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=rafik44
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - net1
+
+networks:
+  net1:
+    external: true
+
+volumes:
+  data:
+    driver: local

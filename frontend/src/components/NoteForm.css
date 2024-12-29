@@ -1,0 +1,41 @@
+/* NoteForm.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+input {
+  width: 80%;               /* Assure que tous les inputs prennent 80% de la largeur */
+  padding: 10px;            /* Un peu de padding pour rendre l'input plus agréable */
+  margin: 10px 0;           /* Marge pour espacer les inputs */
+  border: 1px solid #ccc;   /* Bordure uniforme */
+  border-radius: 10px;       /* Bord arrondi */
+  font-size: 14px;          /* Taille de la police uniforme */
+  box-sizing: border-box;   /* Pour s'assurer que padding et border ne changent pas la taille de l'input */
+}
+
+
+
+button:hover {
+  background-color: #45a049;
+}
